@@ -1,15 +1,15 @@
 <h1>Titter</h1>
-<% if session[:login_uid]==nil %>
+<% if current_user==nil %>
 <%= link_to 'ログイン','login_page' %>
 <%= link_to 'ユーザ登録','regi_page' %>
 <%end%>
 
 
-<% if session[:login_uid]!=nil %>
+<% if current_user!=nil %>
 <%= link_to 'ログアウト','logout' %>
 <%= link_to 'プロフィールを入力する','new_profile' %>
 <%= link_to 'ツイートする','new_tweet' %>
-
+<%= link_to 'アカウントを削除する','del_user' %>
 <p>
 プロフィール<br>
 <% if @prof!=nil %>
@@ -34,9 +34,10 @@
 
 <% if p!=nil %>
 <%= button_to '後から思ったらそんなによくなかった', 'not_like',{method: :post,params: {lid: p}} %>
-<% elsif t.user_id!=User5.find_by(uid: session[:login_uid]).id %>
+<% elsif t.user_id!=User5.find_by(uid: current_user.uid).id %>
 <%= button_to 'いいね','like',{method: :post,params: {tid: t.id}} %>
 <% else %>
+<%= button_to 'ツイートを削除する','del_tweet', {method: :post,params: {tid: t.id}}%>
 <p>自分のツイートです</p>
 <% end %>
 <%end%>

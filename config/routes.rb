@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post 'titter/regist'
   post '/like', to: 'titter#like'
   post '/not_like', to: 'titter#not_like'
+  get '/del_user', to: 'titter#acdel'
+  post '/del_tweet', to: 'titter#twdel'
   root 'titter#top'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
